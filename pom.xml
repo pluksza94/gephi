@@ -1306,5 +1306,8 @@
         <module>modules/WelcomeScreen</module>
         <module>modules/CoreLibraryWrapper</module>
         <module>modules/UILibraryWrapper</module>
+        <module>RfGPPlugin</module>
+        <module>RandomWalk</module>
+        <module>RRfGPPlugin</module>
     </modules>
 </project>
