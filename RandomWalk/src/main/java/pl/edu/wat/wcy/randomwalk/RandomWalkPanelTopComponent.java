@@ -8,6 +8,8 @@ package pl.edu.wat.wcy.randomwalk;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -162,6 +164,7 @@ public final class RandomWalkPanelTopComponent extends TopComponent {
         startNodeField.setEnabled(false);
 
         if (listOfProbabilities.size() < numberOfSteps) {
+            Logger.getLogger(getClass().getSimpleName()).log(Level.INFO, "Step: {0}", new Object[]{numberOfSteps});
             listOfProbabilities.add(randomWalk.nextStep());
         }
 
