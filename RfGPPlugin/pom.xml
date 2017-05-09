@@ -7,7 +7,7 @@
         <version>0.9.2-SNAPSHOT</version>
     </parent>
     <groupId>pl.edu.wat.wcy</groupId>
-    <artifactId>RfGPPlugin</artifactId>
+    <artifactId>rfgp-plugin</artifactId>
     <packaging>nbm</packaging>
     <build>
         <plugins>
@@ -81,15 +81,17 @@
             <version>RELEASE82</version>
         </dependency>
         <dependency>
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>ValidationAPI</artifactId>
-            <version>RELEASE712</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util-ui</artifactId>
             <version>RELEASE82</version>
         </dependency>
+        <dependency>
+            <groupId>org.gephi</groupId>
+            <artifactId>lib.validation</artifactId>
+            <version>0.9.2-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
+    <name>RfGPPlugin</name>
+    <description>Wtyczka pozwalająca wylosować maksymalny f-graf o n-wierzchołkach za pomocą algorytmu RfGP</description>
 </project>

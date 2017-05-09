@@ -471,17 +471,17 @@
         </dependency>
         <dependency>
             <groupId>pl.edu.wat.wcy</groupId>
-            <artifactId>RandomWalk</artifactId>
+            <artifactId>random-walk</artifactId>
             <version>0.9.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>pl.edu.wat.wcy</groupId>
-            <artifactId>RfGPPlugin</artifactId>
+            <artifactId>rfgp-plugin</artifactId>
             <version>0.9.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>pl.edu.wat.wcy</groupId>
-            <artifactId>RRfGPPlugin</artifactId>
+            <artifactId>rrfgp-plugin</artifactId>
             <version>0.9.2-SNAPSHOT</version>
         </dependency>
     </dependencies>

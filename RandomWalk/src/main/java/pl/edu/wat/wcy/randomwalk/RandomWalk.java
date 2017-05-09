@@ -1,10 +1,26 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2008-2017 Gephi
+ * Authors : Paweł Łuksza
+ * 
+ * This file is part of Gephi.
+ *
+ * Gephi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gephi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package pl.edu.wat.wcy.randomwalk;
 
+import java.awt.Color;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,12 +42,10 @@ public class RandomWalk {
 
     private Graph graph;
     private Map<String, Double> map;
-    private Map<String, Double> nextMap;
     private Map<String, Map<String, Double>> mapOfEdgeWeights;
 
     public RandomWalk(String startNode) throws UnsupportedOperationException {
         map = new HashMap<>();
-        nextMap = new HashMap<>();
         mapOfEdgeWeights = new HashMap<>();
 
         graph = Lookup.getDefault().lookup(GraphController.class).getGraphModel().getGraph();
@@ -72,6 +86,8 @@ public class RandomWalk {
     }
 
     public Map<String, Double> nextStep() {
+        Map<String, Double> nextMap = new HashMap<>();
+
         for (Map.Entry<String, Double> m : map.entrySet()) {
             for (Node node : graph.getNodes()) {
                 if (node.getId().toString().equals(m.getKey())) {
@@ -105,5 +121,12 @@ public class RandomWalk {
         }
 
         return new TreeMap<>(map);
+    }
+
+    public void setColors(Map<String, Double> currMap) {
+        for (Node node : graph.getNodes()) {
+            node.setColor((currMap.containsKey(node.getId().toString())) ? Color.RED : Color.BLACK);
+
+        }
     }
 }

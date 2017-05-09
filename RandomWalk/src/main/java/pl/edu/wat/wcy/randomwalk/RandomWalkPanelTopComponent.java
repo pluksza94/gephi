@@ -1,8 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2008-2017 Gephi
+ * Authors : Paweł Łuksza
+ * 
+ * This file is part of Gephi.
+ *
+ * Gephi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gephi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package pl.edu.wat.wcy.randomwalk;
 
 import java.util.LinkedList;
@@ -153,37 +168,45 @@ public final class RandomWalkPanelTopComponent extends TopComponent {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nextStepButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextStepButtonActionPerformed
-        // TODO add your handling code here:
-        if (randomWalk == null) {
-            randomWalk = new RandomWalk(startNodeField.getText());
-            listOfProbabilities = new LinkedList<>();
-            numberOfSteps = 0;
+        try {
+            if (randomWalk == null) {
+                randomWalk = new RandomWalk(startNodeField.getText());
+
+                listOfProbabilities = new LinkedList<>();
+                numberOfSteps = 0;
+            }
+            numberOfSteps++;
+
+            startNodeField.setEnabled(false);
+
+            if (listOfProbabilities.size() < numberOfSteps) {
+                Logger.getLogger(getClass().getSimpleName()).log(Level.INFO, "Step: {0}", new Object[]{numberOfSteps});
+                listOfProbabilities.add(randomWalk.nextStep());
+            }
+
+            numberOfStepsLabel.setText("Liczba wykonanych kroków: " + numberOfSteps);
+
+            Map<String, Double> probabilityMap = listOfProbabilities.get(numberOfSteps - 1);
+
+            String probabilityInfo = "";
+
+            for (Map.Entry<String, Double> m : probabilityMap.entrySet()) {
+                probabilityInfo += "[" + m.getKey() + "]: " + m.getValue() + "<br>";
+            }
+            listOfProbabilitiesLabel.setText("<html>" + probabilityInfo + "</html>");
+
+            randomWalk.setColors(probabilityMap);
+        } catch (UnsupportedOperationException e) {
+            numberOfStepsLabel.setText("Nie ma takiego wierzchołka początkowego!");
         }
-        numberOfSteps++;
 
-        startNodeField.setEnabled(false);
-
-        if (listOfProbabilities.size() < numberOfSteps) {
-            Logger.getLogger(getClass().getSimpleName()).log(Level.INFO, "Step: {0}", new Object[]{numberOfSteps});
-            listOfProbabilities.add(randomWalk.nextStep());
-        }
-
-        numberOfStepsLabel.setText("Liczba wykonanych kroków: " + numberOfSteps);
-
-        Map<String, Double> probabilityMap = listOfProbabilities.get(numberOfSteps - 1);
-
-        String probabilityInfo = "";
-
-        for (Map.Entry<String, Double> m : probabilityMap.entrySet()) {
-            probabilityInfo += "[" + m.getKey() + "]: " + m.getValue() + "<br>";
-        }
-        listOfProbabilitiesLabel.setText("<html>" + probabilityInfo + "</html>");
     }//GEN-LAST:event_nextStepButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         startNodeField.setEnabled(true);
         randomWalk = null;
+        numberOfSteps = 0;
         numberOfStepsLabel.setText(" ");
         listOfProbabilitiesLabel.setText("");
         listOfProbabilities.clear();
@@ -195,7 +218,7 @@ public final class RandomWalkPanelTopComponent extends TopComponent {
             numberOfSteps--;
 
             numberOfStepsLabel.setText("Liczba wykonanych kroków: " + numberOfSteps);
-            
+
             Map<String, Double> probabilityMap = listOfProbabilities.get(numberOfSteps - 1);
 
             String probabilityInfo = "";
@@ -204,6 +227,12 @@ public final class RandomWalkPanelTopComponent extends TopComponent {
                 probabilityInfo += "[" + m.getKey() + "]: " + m.getValue() + "<br>";
             }
             listOfProbabilitiesLabel.setText("<html>" + probabilityInfo + "</html>");
+
+            randomWalk.setColors(probabilityMap);
+        } else if (numberOfSteps == 1) {
+            numberOfStepsLabel.setText("Cofnięto już do początku!");
+        } else{
+            numberOfStepsLabel.setText("Najpierw wykonaj następny krok!");
         }
     }//GEN-LAST:event_prevButtonActionPerformed
 

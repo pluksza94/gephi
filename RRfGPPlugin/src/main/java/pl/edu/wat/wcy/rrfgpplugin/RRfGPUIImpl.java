@@ -1,3 +1,23 @@
+/*
+ * Copyright 2008-2017 Gephi
+ * Authors : Paweł Łuksza
+ * 
+ * This file is part of Gephi.
+ *
+ * Gephi is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Gephi is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Gephi.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package pl.edu.wat.wcy.rrfgpplugin;
 
 import javax.swing.JPanel;
@@ -19,7 +39,8 @@ public class RRfGPUIImpl implements RRfGPUI {
         if (panel == null) {
             panel = new RRfGPPanel();
         }
-        return panel;
+
+        return RRfGPPanel.createValidationPanel(panel);
     }
 
     @Override
@@ -42,7 +63,7 @@ public class RRfGPUIImpl implements RRfGPUI {
         rrfgp.setNumberOfNodes(Integer.parseInt(panel.nodeField.getText()));
         rrfgp.setDegree(Integer.parseInt(panel.degreeField.getText()));
         rrfgp.setNumberOfSteps(Integer.parseInt(panel.numberOfStepsField.getText()));
-        
+
         panel = null;
     }
 

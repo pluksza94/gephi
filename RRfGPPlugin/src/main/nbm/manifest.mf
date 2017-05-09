@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
 OpenIDE-Module-Localizing-Bundle: pl/edu/wat/wcy/rrfgpplugin/Bundle.properties
-
+OpenIDE-Module-Display-Category: Plugin
+OpenIDE-Module-Name: RRfGP Plugin
