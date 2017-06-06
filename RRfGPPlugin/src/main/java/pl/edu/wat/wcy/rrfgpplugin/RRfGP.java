@@ -195,7 +195,7 @@ public class RRfGP implements Generator {
     }
 
     public void setNumberOfNodes(int numberOfNodes) {
-        if (numberOfNodes >= 4 && numberOfNodes <= 7) {
+        if (numberOfNodes >= 4 && numberOfNodes <= 8) {
             this.numberOfNodes = numberOfNodes;
         } else {
             throw new IllegalArgumentException("Liczba wierzchołków dlatego algorytmu musi być pomiędzy 4 i 7");

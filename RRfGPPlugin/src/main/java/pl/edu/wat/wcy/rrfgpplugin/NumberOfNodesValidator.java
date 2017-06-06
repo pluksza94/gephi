@@ -34,7 +34,7 @@ public class NumberOfNodesValidator implements Validator<String> {
         boolean result = false;
         try {
             Integer i = Integer.parseInt(model);
-            result = (i > 0 && i < 8);
+            result = (i > 0 && i < 9);
         } catch (Exception e) {
         }
         if (!result) {
